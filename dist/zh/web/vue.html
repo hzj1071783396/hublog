@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>组键 | 小胡学院</title>
+    <meta name="description" content="">
+    
+    
+    <link rel="preload" href="/assets/css/0.styles.9146ed1f.css" as="style"><link rel="preload" href="/assets/js/app.3ff530e3.js" as="script"><link rel="preload" href="/assets/js/2.bee31c78.js" as="script"><link rel="preload" href="/assets/js/8.d52b7e87.js" as="script"><link rel="prefetch" href="/assets/js/10.ffcdad45.js"><link rel="prefetch" href="/assets/js/3.051bf95f.js"><link rel="prefetch" href="/assets/js/4.2342d93f.js"><link rel="prefetch" href="/assets/js/5.59ff9089.js"><link rel="prefetch" href="/assets/js/6.842c0281.js"><link rel="prefetch" href="/assets/js/7.fe28e952.js"><link rel="prefetch" href="/assets/js/9.1e3458ed.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.9146ed1f.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">小胡学院</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/zh/web/vue.html" class="nav-link router-link-exact-active router-link-active">前端</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/zh/web/vue.html" class="nav-link router-link-exact-active router-link-active">前端</a></div> <!----></nav>  <ul class="sidebar-links"><li><a href="/zh/web/vue.html" class="active sidebar-link">组键</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/zh/web/vue.html#创建方式" class="sidebar-link">创建方式</a></li><li class="sidebar-sub-header"><a href="/zh/web/vue.html#私有组键" class="sidebar-link">私有组键</a></li><li class="sidebar-sub-header"><a href="/zh/web/vue.html#组键的自定义属性-props" class="sidebar-link">组键的自定义属性 props</a></li><li class="sidebar-sub-header"><a href="/zh/web/vue.html#父子组键" class="sidebar-link">父子组键</a></li><li class="sidebar-sub-header"><a href="/zh/web/vue.html#父子组键实现v-model效果" class="sidebar-link">父子组键实现v-model效果</a></li></ul></li><li><a href="/zh/web/vue-press.html" class="sidebar-link">vuepress</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="组键"><a href="#组键" class="header-anchor">#</a> 组键</h1> <h2 id="创建方式"><a href="#创建方式" class="header-anchor">#</a> 创建方式</h2> <pre><code>第一种方式
+	var com1 = Vue.extend({
+		template:'&lt;h3&gt;这是使用Vue.extend创建的组件&lt;/h3&gt;'
+	})
+	Vue.component('mycom1',com1)
+	或
+	Vue.component('mycom1',Vue.extend({
+		template:'&lt;h3&gt;这是使用Vue.extend创建的组件&lt;/h3&gt;'
+	}))
+	
+第二种方式
+    Vue.component('mycom1',{
+		template:'&lt;h3&gt;这是使用Vue.extend创建的组件111&lt;/h3&gt;'
+	})
+	
+第三种方式（优点，有代码提示）
+    在body里边，app的外边
+    &lt;template id=&quot;temp3&quot;&gt;
+		&lt;div&gt;
+			&lt;h3&gt;这是使用Vue.extend创建的组件&lt;/h3&gt;
+		&lt;/div&gt;
+	&lt;/template&gt;
+	
+    Vue.component('mycom3',{
+        template:'#temp3'
+    })
+</code></pre> <h2 id="私有组键"><a href="#私有组键" class="header-anchor">#</a> 私有组键</h2> <pre><code>data必须是一个方法，把值返回（返回的好处是，每用一个data时都是一个新的对象，互不影响）
+    components:{
+		login:{
+			template:'&lt;h1&gt;私有组键--&lt;/h1&gt;'
+		},
+		data:function(){
+			return {
+				msg:'组键中的data'
+			}
+		}
+	}
+</code></pre> <h2 id="组键的自定义属性-props"><a href="#组键的自定义属性-props" class="header-anchor">#</a> 组键的自定义属性 props</h2> <pre><code>	 components:{
+		login:{
+			template:'&lt;h1&gt;私有组键--&lt;/h1&gt;',
+			props:['parentmsg']  //相当于父组件中的data
+			
+		},
+		data:function(){
+			return {
+				msg:'组键中的data'
+			}
+		}
+	}
+</code></pre> <h2 id="父子组键"><a href="#父子组键" class="header-anchor">#</a> 父子组键</h2> <pre><code>传值 使用时用v-bind (:)
+    子组件不能直接使用父组件的值，但是在使用的时候可以用数据绑定的方法把父组件传入的子组件中
+    
+传方法 用v-on (@)
+
+使用传递过来的方法
+    components:{
+		login:{
+			template:'&lt;h1 @func='myclick'&gt;私有组键--&lt;/h1&gt;',
+			props:['parentmsg']  //相当于父组件中的data
+			
+		},
+		data:function(){
+			return {
+				msg:'组键中的data'
+			}
+		},
+		methods:{
+		    myclick:function(){
+		        this.$emit('func','param1',param2...) //后边几个是传递过来的参数
+		    }
+		}
+	}
+</code></pre> <h2 id="父子组键实现v-model效果"><a href="#父子组键实现v-model效果" class="header-anchor">#</a> 父子组键实现v-model效果</h2> <pre><code>v-model是vue自带的，也可以自定义，但是有可能造成冲突。所以我们使用另一种方法
+
+子组件中
+</code></pre> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>my-input-main<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>component-title<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">&gt;</span></span>{{title}}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>my-input-input<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">:type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>type<span class="token punctuation">&quot;</span></span> <span class="token attr-name">v-model</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>thisValue<span class="token punctuation">&quot;</span></span><span class="token punctuation">/&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+    <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+        name<span class="token punctuation">:</span> <span class="token string">&quot;myInput&quot;</span><span class="token punctuation">,</span>
+        props<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'type'</span><span class="token punctuation">,</span><span class="token string">'length'</span><span class="token punctuation">,</span><span class="token string">'title'</span><span class="token punctuation">,</span><span class="token string">'myValue'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token punctuation">{</span>
+                thisValue<span class="token punctuation">:</span><span class="token keyword">this</span><span class="token punctuation">.</span>myValue
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        watch<span class="token punctuation">:</span><span class="token punctuation">{</span>
+            <span class="token function">thisValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">$emit</span><span class="token punctuation">(</span><span class="token string">'update:myValue'</span><span class="token punctuation">,</span><span class="token keyword">this</span><span class="token punctuation">.</span>thisValue<span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+    <span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><pre><code>父组件中
+</code></pre> <div class="language- extra-class"><pre class="language-text"><code>&lt;template&gt;
+    &lt;div class=&quot;content-main&quot;&gt;
+        &lt;my-input type=&quot;text&quot; :my-value.sync=&quot;text&quot; title=&quot;单行文本&quot;/&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+    export default {
+        name: &quot;index&quot;,
+        data(){
+            return{
+                text:&quot;我是自定义组件&quot;
+            }
+        }
+    }
+&lt;/script&gt;
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><!----> <span class="next"><a href="/zh/web/vue-press.html">vuepress</a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.3ff530e3.js" defer></script><script src="/assets/js/2.bee31c78.js" defer></script><script src="/assets/js/8.d52b7e87.js" defer></script>
+  </body>
+</html>
